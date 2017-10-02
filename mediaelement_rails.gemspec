@@ -5,9 +5,9 @@ require "mediaelement_rails/version"
 Gem::Specification.new do |s|
   s.name        = "mediaelement_rails"
   s.version     = MediaelementRails::VERSION
-  s.authors     = ["Mark Oleson", "Tobias Schlottke", "Pete Browne"]
-  s.email       = ["fusion2004@gmail.com", "tobias.schlottke@gmail.com", "me@petebrowne.com"]
-  s.homepage    = "https://github.com/tobsch/mediaelement_rails"
+  s.authors     = ["Mark Oleson", "Tobias Schlottke", "Pete Browne", "Patrick Kolodgy"]
+  s.email       = ["fusion2004@gmail.com", "tobias.schlottke@gmail.com", "me@petebrowne.com", "pkolodgy@gmail.com"]
+  s.homepage    = "https://github.com/pkolo/mediaelement_rails"
   s.summary     = %q{MediaElement.js for Rails}
   s.description = %q{A MediaElement gem(engine) for Rails. Makes embedding HTML5 video easy.}
   s.license     = "MIT"
