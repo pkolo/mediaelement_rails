@@ -6,8 +6,6 @@ module MediaelementRails
     namespace "mediaelement_rails"
 
     UPDATE_FILES = {
-      "mediaelement.js"        => "javascripts",
-      "mediaelementplayer-legacy.js"  => "javascripts",
       "mediaelement-and-player.js" => "javascripts",
       "mediaelementplayer.css" => "stylesheets",
       "mejs-skins.css"         => "stylesheets",
