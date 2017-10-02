@@ -4,25 +4,26 @@ module MediaelementRails
   class Updater < Thor
     include Thor::Actions
     namespace "mediaelement_rails"
-    
+
     UPDATE_FILES = {
       "mediaelement.js"        => "javascripts",
-      "mediaelementplayer.js"  => "javascripts",
+      "mediaelementplayer-legacy.js"  => "javascripts",
+      "mediaelement-and-player.js" => "javascripts",
       "mediaelementplayer.css" => "stylesheets",
       "mejs-skins.css"         => "stylesheets",
       "*.{svg,png,gif}"        => "images",
       "*.{swf,xap}"            => "plugins"
     }
-    
+
     TRANSFORMATIONS = {
       "**/*.css.erb" => :add_asset_path_helper,
       "**/*.js"      => :remove_weird_characters
     }
-    
+
     def self.source_root
       File.expand_path("..", __FILE__)
     end
-    
+
     desc "update", "Update the MediaElement.js files"
     method_option "vendor_path",
       :desc    => "Path to the the MediaElement.js git repo",
@@ -34,7 +35,7 @@ module MediaelementRails
       :aliases => %w(-a)
     method_option "git",
       :desc    => "URL of the MediaElement.js git repo to clone",
-      :default => "http://github.com/johndyer/mediaelement.git",
+      :default => "http://github.com/mediaelement/mediaelement.git",
       :aliases => %w(-g)
     method_option "tag",
       :desc    => "The tag to checkout in the MediaElement.js git repo",
@@ -43,7 +44,7 @@ module MediaelementRails
     def update
       assets_path = options[:assets_path]
       vendor_path = options[:vendor_path]
-      
+
       # Update the vendored MediaElement.js
       run "git clone #{options[:git]} #{vendor_path}",    :capture => true unless File.directory? vendor_path
       run "cd #{vendor_path} && git pull origin master",  :capture => true
@@ -57,7 +58,7 @@ module MediaelementRails
           copy_file file, new_name
         end
       end
-      
+
       # Peform any transformations necessary to the files
       TRANSFORMATIONS.each do |matcher, transformation|
         Dir[File.join(assets_path, matcher)].each do |file|
@@ -67,14 +68,14 @@ module MediaelementRails
         end
       end
     end
-    
+
     protected
-    
+
     # Replaces `url(...)` with url(<%= asset_path "..." %>) in CSS files.
     def add_asset_path_helper(content)
       content.gsub /url\((.*?)\)/, 'url(<%= asset_path "mediaelement_rails/\1" %>)'
     end
-    
+
     # Removes the weird unicode character from the MediaElement source files.
     def remove_weird_characters(content)
       content.force_encoding('utf-8').gsub /﻿/, ''
