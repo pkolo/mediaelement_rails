@@ -8,7 +8,7 @@ Add the gem to the list of required gems in your `Gemfile`:
 
 ``` ruby
 # ...
-gem "mediaelement_rails"
+gem "mediaelement_rails", git: 'https://github.com/pkolo/mediaelement_rails.git'
 # ...
 ```
 
@@ -30,15 +30,6 @@ Load the Mediaelement CSS in your `application.css`:
  * and optionally:
  *= require mediaelement_rails/mejs-skins
  */
-```
-
-## Wanna use MediaElement (not the player) only? ##
-
-This is easy as hell too!
-Don't include any CSS and include the following in your `application.js` to get it working:
-
-``` javascript
-//= require mediaelement_rails/rails
 ```
 
 ## Anything else I should know? ##
