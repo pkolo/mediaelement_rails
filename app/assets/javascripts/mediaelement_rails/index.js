@@ -1,2 +1,3 @@
 //= require ./rails
-//= require ./mediaelementplayer
+//= require ./mediaelementplayer-legacy
+//= require ./mediaelement-and-player
